@@ -1,7 +1,11 @@
 const express = require("express"),
-    path = require("path"),
+    //path = require("path"),
     app = express(),
     puerto = 3000;
+
+    //se llaman a las rutas que contienen las peticiones
+    app.use(express.json());
+    app.use(require('./routes/clients.js'));
 
 app.get('/', (peticion, respuesta) => {
     console.log('hola nodemon');
