@@ -5,6 +5,7 @@ port = process.env.PORT || 3000;
 require("dotenv").config();
 
 const userRoutes = require("./routes/users");
+const petRoutes = require("./routes/pets");
 
 /*prefix - middleware*/
 app.use('/api', userRoutes);
