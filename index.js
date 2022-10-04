@@ -8,6 +8,7 @@ const userRoutes = require("./routes/users");
 const petRoutes = require("./routes/pets");
 
 /*prefix - middleware*/
+app.use(express.json());
 app.use('/api', userRoutes);
 
 /* ROUTES */
