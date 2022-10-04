@@ -7,6 +7,7 @@ require("dotenv").config();
 const userRoutes = require("./routes/users");
 
 /*prefix - middleware*/
+app.use(express.json());
 app.use('/api', userRoutes);
 
 /* ROUTES */
