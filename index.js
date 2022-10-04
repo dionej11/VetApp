@@ -1,26 +1,25 @@
-const express = require("express"),
-    //path = require("path"),
-    app = express(),
-    puerto = 3000;
+const express = require("express"), 
+mongoose =require("mongoose"),
+app = express(), 
+port = process.env.PORT || 3000;
+require("dotenv").config();
 
-    //se llaman a las rutas que contienen las peticiones
-    app.use(express.json());
-    app.use(require('./routes/clients.js'));
+const userRoutes = require("./routes/users");
 
-app.get('/', (peticion, respuesta) => {
-    console.log('hola nodemon');
-    respuesta.json({
-        saludo: `hola isaaaa!!! como vas`
-    })
-});
+/*prefix - middleware*/
+app.use('/api', userRoutes);
 
-// Una vez definidas nuestras rutas podemos iniciar el servidor
-app.listen(puerto, err => {
-    if (err) {
-        // Aquí manejar el error
-        console.error("Error escuchando: ", err);
-        return;
-    }
-    // Si no se detuvo arriba con el return, entonces todo va bien ;)
-    console.log(`Escuchando en el puerto :${puerto}`);
-});
+/* ROUTES */
+app.get("/", (req, res) => {
+    res.send("Bienvenidas al backend");
+})
+
+/*MongoDB conection*/
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log("Conectado a MongoDB Atlas"))
+    .catch((error) => console.error(error))
+
+
+/*server listening mood*/
+app.listen(port, () => console.log('Servidor escuchando en el puerto ', port));
