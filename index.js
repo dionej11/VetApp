@@ -4,14 +4,14 @@ app = express(),
 port = process.env.PORT || 3000;
 require("dotenv").config();
 
-const userRoutes = require("./routes/users");
-const petRoutes = require("./routes/pets");
+/* ROUTES */
 
 /*prefix - middleware*/
 app.use(express.json());
-app.use('/api', userRoutes);
+app.use('/api', require("./routes/users"));
+app.use('/api', require("./routes/pets"));
+app.use('/api', require("./routes/medicine"));
 
-/* ROUTES */
 app.get("/", (req, res) => {
     res.send("Bienvenidas al backend");
 })
@@ -21,7 +21,6 @@ mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => console.log("Conectado a MongoDB Atlas"))
     .catch((error) => console.error(error))
-
 
 /*server listening mood*/
 app.listen(port, () => console.log('Servidor escuchando en el puerto ', port));

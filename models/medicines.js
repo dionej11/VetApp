@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const medicinesSchema = mongoose.Schema({
-    code: {
-        type: String,
-        require: true
-    },
     nameMedicine: {
         type: String,
         require: true
@@ -16,6 +12,9 @@ const medicinesSchema = mongoose.Schema({
     doses: {
         type: Number,
         require: true
-    }
+    },
+    // idPet: {
+    //     type: ObjectId
+    // }
 });
 module.exports = mongoose.model('Medicines', medicinesSchema);

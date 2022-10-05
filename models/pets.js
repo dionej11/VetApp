@@ -1,13 +1,7 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
-let Users = mongoose.model('Users');
-let Medicines = mongoose.model('Medicines');
-
 const petsSchema = mongoose.Schema({
-    identifier: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true
@@ -24,9 +18,9 @@ const petsSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    client: { type: Schema.ObjectId, ref: "Users" },
-
-    medicines: { type: Schema.ObjectId, ref: "Medicines" }
+    idUser: {
+        type: ObjectId
+    }
 });
 
 module.exports = mongoose.model('Pets', petsSchema)
