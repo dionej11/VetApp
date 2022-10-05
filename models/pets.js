@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-let Users = mongoose.model('Users');
-let Medicines = mongoose.model('Medicines');
+//let Users = mongoose.model('Users');
+//let Medicines = mongoose.model('Medicines');
 
 const petsSchema = mongoose.Schema({
     identifier: {
@@ -24,9 +24,9 @@ const petsSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    client: { type: Schema.ObjectId, ref: "Users" },
+    //client: { type: Schema.ObjectId, ref: "Users" },
 
-    medicines: { type: Schema.ObjectId, ref: "Medicines" }
+    //medicines: { type: Schema.ObjectId, ref: "Medicines" }
 });
 
 module.exports = mongoose.model('Pets', petsSchema)
