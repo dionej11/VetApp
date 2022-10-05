@@ -16,7 +16,7 @@ router.post("/create_pet/:idUser", (request, response) => {
 });
 
 router.get("/pets", (request, response) => {
-    userSchema
+    petSchema
         .find()
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
@@ -24,26 +24,26 @@ router.get("/pets", (request, response) => {
 
 //get a pet
 router.get("/pets/:id", (request, response) => {
-    const { id } = request.params;
-    userSchema
+    const id = request.params.id;
+    petSchema
         .findById(id)
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });
 
 router.put("/update_pet/:id", (request, response) => {
-    const { id } = request.params();
+    const id = request.params.id;
     const { identifier, name, race, age, weight} = request.body;
-    userSchema
+    petSchema
         .updateOne({_id: id}, { $set: {identifier, name, race, age, weight} })
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });
 
 router.delete("/delete_pet/:id", (request, response) => {
-    const { id } = request.params();
-    userSchema
-        .remove({_id: id})
+    const id = request.params.id;
+    petSchema
+        .deleteOne({_id: id})
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });

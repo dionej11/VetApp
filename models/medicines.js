@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require("mongoose");
 
 const medicinesSchema = mongoose.Schema({
@@ -13,8 +14,8 @@ const medicinesSchema = mongoose.Schema({
         type: Number,
         require: true
     },
-    // idPet: {
-    //     type: ObjectId
-    // }
+    idPet: {
+        type: ObjectId
+    }
 });
 module.exports = mongoose.model('Medicines', medicinesSchema);

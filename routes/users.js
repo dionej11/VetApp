@@ -3,13 +3,45 @@ userSchema = require("../models/user"),
 router = express.Router();
 
 /*Crear usuario*/
-router.post('/new_user', (req, res) => {
+router.post('/create_user', (request, response) => {
     /*Uso del esquema para la valdación de los campos */
-    const user = userSchema(req.body);
+    const user = userSchema(request.body);
     user
         .save()
-        .then((data) => res.json(data))
-        .catch((error)=> res.json({message: error}));
+        .then((data) => response.json(data))
+        .catch((error)=> response.json({message: error}));
+});
+/*Eliminar usuario*/
+router.delete("/delete_user/:cedula", (request, response) => {
+    const cedula = request.params.cedula;
+    userSchema
+        .remove({"cc": cedula})
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
+});
+/*Actualizar usuario*/
+router.put("/update_user/:cedula", (request, response) => {
+    const cedula = request.params.cedula;
+    const { names, surnames, address, phoneNumber } = request.body;
+    userSchema
+        .updateOne({"cc": cedula}, { $set: {names, surnames, address, phoneNumber} })
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
+});
+/*Ver un usuario*/
+router.get("/users/:cedula", (request, response) => {
+    const cedula = request.params.cedula;
+    userSchema
+        .findOne({"cc": cedula})
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
+});
+/*Ver usuarios*/
+router.get("/users", (request, response) => {
+    userSchema
+        .find()
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
 });
 
 module.exports = router;
