@@ -1,6 +1,7 @@
 const express = require("express"),
 router = express.Router();
 
+const { ObjectId } = require("mongodb");
 const petSchema = require('../models/pets');
 
 router.post("/create_pet/:idUser", (request, response) => {
@@ -26,7 +27,15 @@ router.get("/pets", (request, response) => {
 router.get("/pets/:id", (request, response) => {
     const id = request.params.id;
     petSchema
-        .findById(id)
+        .findOne({"_id": id})
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
+});
+
+router.get("/petsUser/:idUser", (request, response) => {
+    const idUser = request.params.idUser;
+    petSchema
+        .find({idUser: ObjectId(idUser)})
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });

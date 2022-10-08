@@ -6,10 +6,15 @@ router = express.Router();
 router.post('/create_user', (request, response) => {
     /*Uso del esquema para la valdación de los campos */
     const user = userSchema(request.body);
-    user
-        .save()
-        .then((data) => response.json(data))
-        .catch((error)=> response.json({message: error}));
+    /*Se verifica si ya existe el usuario a ingresar*/
+    if (userSchema.find({cc: request.body.cc }) == null) {
+        response.json({"msj":"existe"});
+    } else {
+        user
+            .save()
+            .then((data) => response.json(data))
+            .catch((error)=> response.json({message: error}));
+    }
 });
 /*Eliminar usuario*/
 router.delete("/delete_user/:cedula", (request, response) => {

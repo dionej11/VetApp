@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 const express = require("express"),
 medicinesSchema = require("../models/medicines"),
 router = express.Router();
@@ -40,6 +42,15 @@ router.get("/medicines/:idMed", (request, response) => {
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });
+
+router.get("/medicinesPet/:idPet", (request, response) => {
+    const idPet = request.params.idPet;
+    medicinesSchema
+        .find({"idPet": ObjectId(idPet)})
+        .then((data) => response.json(data))
+        .catch((error) => response.json({ message: error }));
+});
+
 /*Ver medicinas*/
 router.get("/medicines", (request, response) => {
     medicinesSchema
