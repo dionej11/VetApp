@@ -1,12 +1,13 @@
 const express = require("express"), 
+cors = require('cors'),
 mongoose =require("mongoose"),
 app = express(), 
 port = process.env.PORT || 3000;
 require("dotenv").config();
 
 /* ROUTES */
-
 /*prefix - middleware*/
+app.use(cors());
 app.use(express.json());
 app.use('/api', require("./routes/users"));
 app.use('/api', require("./routes/pets"));
