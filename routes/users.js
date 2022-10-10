@@ -25,11 +25,11 @@ router.delete("/delete_user/:cedula", (request, response) => {
         .catch((error) => response.json({ message: error }));
 });
 /*Actualizar usuario*/
-router.put("/update_user/:cedula", (request, response) => {
+router.put("/update_user/:cedula", (request, response) =>{
     const cedula = request.params.cedula;
-    const { names, surnames, address, phoneNumber } = request.body;
+    const editedUser= request.body;
     userSchema
-        .updateOne({"cc": cedula}, { $set: {names, surnames, address, phoneNumber} })
+        .updateOne({"cc": cedula}, { $set: {...editedUser} })
         .then((data) => response.json(data))
         .catch((error) => response.json({ message: error }));
 });
