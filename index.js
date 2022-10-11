@@ -12,6 +12,7 @@ app.use(express.json());
 app.use('/api', require("./routes/users"));
 app.use('/api', require("./routes/pets"));
 app.use('/api', require("./routes/medicine"));
+app.use('/api', require("./routes/report"));
 
 app.get("/", (req, res) => {
     res.send("Bienvenidas al backend");
