@@ -9,7 +9,8 @@ router.get("/reportUsers", (request, response) => {
           '$project': {
             '_id': 0, 
             'names': 1, 
-            'surnames': 1
+            'surnames': 1,
+            'cc': 1
           }
         }
       ];
